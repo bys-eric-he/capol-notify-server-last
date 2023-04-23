@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.capol.notify.manage.domain.repository.UserQueueMessageMapper">
+    <resultMap id="BaseResultMap" type="com.capol.notify.manage.domain.model.message.UserQueueMessageDO">
+        <result property="id" column="id" jdbcType="BIGINT"/>
+        <result property="serviceId" column="service_id" jdbcType="VARCHAR"/>
+        <result property="queueId" column="queue_id" jdbcType="BIGINT"/>
+        <result property="businessType" column="business_type" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="LONGVARCHAR"/>
+        <result property="sendResponse" column="send_response" jdbcType="LONGVARCHAR"/>
+        <result property="processStatus" column="process_status" jdbcType="INTEGER"/>
+        <result property="status" column="status" jdbcType="TINYINT"/>
+        <result property="consumerStartTime" column="consumer_start_time" jdbcType="BIGINT"/>
+        <result property="consumerEndTime" column="consumer_end_time" jdbcType="BIGINT"/>
+        <result property="createDateTime" column="created_datetime" jdbcType="TIMESTAMP"/>
+        <result property="latestModifiedDateTime" column="latest_modified_datetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        `id`,
+        `service_id`,
+        `queue_id`,
+        `business_type`,
+        `content`,
+        `send_response`
+        `process_status`,
+        `consumer_start_time`,
+        `consumer_end_time`
+    </sql>
+
+    <select id="findByMessageId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user_queue_message WHERE `status` =1 AND id= #{id}
+    </select>
+</mapper>
